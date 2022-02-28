@@ -1,0 +1,39 @@
+exp_name: finetune-swag-0.001
+seed: 1234
+
+model:
+  cp_path: checkpoints/fairseq/wav2vec_small.pt
+
+loss:
+  masked_loss: true
+
+checkpoint:
+  path: null
+  iters: 10000
+  epoch: true
+
+training:
+  batch_size: 8
+  epochs: 100
+  data_path: /home/jiameng/data_voicemos/phase1-main/DATA/sets/train_mos_list.txt
+
+optimizer:
+  lr: 0.001
+
+eval:
+  batch_size: 1
+  run_iters: null
+  run_epoch: true
+
+  run_type: swag
+
+  swag_scale: 1.0
+  swag_samples: 10
+
+  set: test
+  dev:
+    out_file: dev_main_answer.txt
+    data_path: /home/jiameng/data_voicemos/phase1-main/DATA/sets/val_mos_list.txt
+  test:
+    out_file: main_answer.txt
+    data_path: /home/jiameng/data_voicemos/phase1-main/DATA/sets/test.scp

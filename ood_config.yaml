@@ -1,0 +1,42 @@
+exp_name: finetune-ood-swag-0.001-influence-corrected
+seed: 1234
+
+model:
+  cp_path: /home/jiameng/mos-finetune-ssl/fairseq/wav2vec_small.pt
+
+loss:
+  masked_loss: true
+
+checkpoint:
+  path: null
+  iters: null
+  epoch: true
+
+training:
+  batch_size: 8
+  epochs: 10000
+  data_path: /home/jiameng/data_voicemos/phase1-ood/DATA/sets/train_mos_list.txt
+
+optimizer:
+  lr: 0.001
+
+eval:
+  batch_size: 1
+  run_iters: null
+  run_epoch: true
+
+  run_type: swag
+
+  swag_scale: 1.0
+  swag_samples: 10
+
+  set: test
+  unlabelled:
+    data_path: /home/jiameng/data_voicemos/phase1-ood/DATA/sets/unlabeled_mos_list.txt
+    out_file: unlabelled_ood_answer.txt
+  dev:
+    data_path: /home/jiameng/data_voicemos/phase1-ood/DATA/sets/val_mos_list.txt
+    out_file: dev_ood_answer.txt
+  test:
+    data_path: /home/jiameng/data_voicemos/phase1-ood/DATA/sets/test.scp
+    out_file: ood_answer.txt
